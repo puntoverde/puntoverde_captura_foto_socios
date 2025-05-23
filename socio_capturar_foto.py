@@ -245,7 +245,7 @@ def main(page: ft.Page):
 
     def saveRostro(e):  
         global init_video,imagen_foto,id_socio
-        btnSaveFoto.content=ft.ProgressRing(width=20,height=20,color=ft.colors.BLUE,stroke_width=2)
+        btnSaveFoto.content=ft.ProgressRing(width=20,height=20,color=ft.Colors.BLUE,stroke_width=2)
         page.update()
         
         file_path = resourse_path("haarcascade_frontalface_default.xml")   
@@ -265,7 +265,7 @@ def main(page: ft.Page):
         imagen_video.src_base64=None
         imagen_video.src=None
         imagen_video.src="db/capture_rostro.png"
-        btnSaveFoto.content=ft.Row([ft.Icon(ft.icons.UPLOAD),ft.Text("Guardar foto")])
+        btnSaveFoto.content=ft.Row([ft.Icon(ft.Icons.UPLOAD),ft.Text("Guardar foto")])
 
         init_video=False
         imagen_foto=None
@@ -306,9 +306,9 @@ def main(page: ft.Page):
     txt_accion=ft.TextField(label="Accion",text_align="center",text_size=50,content_padding=ft.Padding(top=2,bottom=2,right=3,left=3),autofocus=True,max_length=4,on_submit=verificar_clasificacion)
     txt_nombre=ft.Text("nombre del usuario.",theme_style=ft.TextThemeStyle.TITLE_MEDIUM)
 
-    btnAbrirCamara=ft.ElevatedButton(text="Abrir",color=ft.colors.BLUE,icon=ft.icons.CAMERA_ENHANCE_OUTLINED,disabled=True,on_click=lambda _:init_camara())
-    btnCapturaFoto=ft.ElevatedButton(text="Capturar",color=ft.colors.BLUE,icon=ft.icons.CAMERA,disabled=True,on_click=lambda _:threading.Thread(target=tomarRostro).start())
-    btnSaveFoto=ft.ElevatedButton(content=ft.Row([ft.Icon(ft.icons.UPLOAD),ft.Text("Guardar")]),disabled=True,color=ft.colors.BLUE,on_click=saveRostro)
+    btnAbrirCamara=ft.ElevatedButton(text="Abrir",color=ft.Colors.BLUE,icon=ft.Icons.CAMERA_ENHANCE_ROUNDED,disabled=True,on_click=lambda _:init_camara())
+    btnCapturaFoto=ft.ElevatedButton(text="Capturar",color=ft.Colors.BLUE,icon=ft.Icons.CAMERA,disabled=True,on_click=lambda _:threading.Thread(target=tomarRostro).start())
+    btnSaveFoto=ft.ElevatedButton(content=ft.Row([ft.Icon(ft.Icons.UPLOAD),ft.Text("Guardar")]),disabled=True,color=ft.Colors.BLUE,on_click=saveRostro)
 
     btn_a=ft.ElevatedButton(text="A",style=ft.ButtonStyle(shape=ft.CircleBorder(),padding=33,text_style=ft.TextStyle(size=40)),disabled=True,on_click=lambda _:setTextAccionInput(1))
     btn_b=ft.ElevatedButton(text="B",style=ft.ButtonStyle(shape=ft.CircleBorder(),padding=33,text_style=ft.TextStyle(size=40)),disabled=True,on_click=lambda _:setTextAccionInput(2))
@@ -325,7 +325,7 @@ def main(page: ft.Page):
                         ft.Container(content=
                     ft.Column(
                         [
-                        ft.Card(content=ft.Container(content=imagen_video),color=ft.colors.BLUE_GREY),
+                        ft.Card(content=ft.Container(content=imagen_video),color=ft.Colors.BLUE_GREY),
                         ft.Row([
                             btnAbrirCamara,
                         btnCapturaFoto,
@@ -336,7 +336,7 @@ def main(page: ft.Page):
                         ]
                 ),padding=5)),
             ft.Column([
-                ft.Container(width=300,height=60,bgcolor=ft.colors.BLUE_GREY_100,content=txt_nombre,alignment=ft.alignment.center,border_radius=10),
+                ft.Container(width=300,height=60,bgcolor=ft.Colors.BLUE_GREY_100,content=txt_nombre,alignment=ft.alignment.center,border_radius=10),
                 ft.Container(width=300,content=txt_accion),
                 ft.Row(
             controls=[
@@ -367,8 +367,8 @@ def main(page: ft.Page):
             ft.Row(
                  controls=[
                     ft.ElevatedButton(text="0",style=ft.ButtonStyle(shape=ft.CircleBorder(),text_style=ft.TextStyle(size=40)),width=90,height=90,on_click=lambda _:setTextInput(0)),
-                    ft.ElevatedButton(content=ft.Icon(name=ft.icons.CLEAR,size=40),style=ft.ButtonStyle(shape=ft.CircleBorder()),bgcolor=ft.colors.RED_ACCENT,color=ft.colors.WHITE,width=90,height=90,on_click=lambda _:threading.Thread(target=clear).start()),
-                    ft.ElevatedButton(content=ft.Icon(name=ft.icons.CHECK,size=40),style=ft.ButtonStyle(shape=ft.CircleBorder()),bgcolor=ft.colors.TEAL_ACCENT,color=ft.colors.WHITE,width=90,height=90,on_click=lambda _:buscar()),
+                    ft.ElevatedButton(content=ft.Icon(name=ft.Icons.CLEAR,size=40),style=ft.ButtonStyle(shape=ft.CircleBorder()),bgcolor=ft.Colors.RED_ACCENT,color=ft.Colors.WHITE,width=90,height=90,on_click=lambda _:threading.Thread(target=clear).start()),
+                    ft.ElevatedButton(content=ft.Icon(name=ft.Icons.CHECK,size=40),style=ft.ButtonStyle(shape=ft.CircleBorder()),bgcolor=ft.Colors.TEAL_ACCENT,color=ft.Colors.WHITE,width=90,height=90,on_click=lambda _:buscar()),
                 ]
             )
             ]),
@@ -401,7 +401,7 @@ def main(page: ft.Page):
                 #     spacing=0,
                 # ),
                 padding=ft.padding.symmetric(vertical=10),
-            ),color=ft.colors.WHITE)
+            ),color=ft.Colors.WHITE)
 
                         
                         

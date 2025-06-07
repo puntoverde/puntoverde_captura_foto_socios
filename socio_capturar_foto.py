@@ -26,19 +26,30 @@ clasificacion=0
 
 cap=None
 
+def resourse_path(relative_path):
+        try:
+            base_path = sys._MEIPASS
+        except:
+            base_path = os.path.abspath(".")
+        return os.path.join(base_path, relative_path)
+
 def main(page: ft.Page):
     page.title = "Capturar Imagen"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.window.width=1200
     page.window.height=900
 
-    txt_password=ft.TextField(label="Contraseña",text_size=30,content_padding=ft.Padding(top=2,bottom=2,right=3,left=3))
+    
 
     def handle_close(e):
+        print(e.data)
         # honestidad2025
-        if(txt_password.value=="honestidad2025"):            
+        if(e.data=="honestidad2025"):            
             page.close(dlg_modal)
-
+    
+    txt_password=ft.TextField(label="Contraseña",text_size=30,content_padding=ft.Padding(top=2,bottom=2,right=3,left=3),on_submit=handle_close)
+    # txt_password.focus()
+    
     dlg_modal = ft.AlertDialog(
         modal=True,
         title=ft.Text("Inicio"),
@@ -52,11 +63,6 @@ def main(page: ft.Page):
         actions_alignment=ft.MainAxisAlignment.END,
         
     )
-
-    
-    # page.open(dlg_modal)
-    
-    
 
     def init_camara():
         global cap,init_video
@@ -110,7 +116,38 @@ def main(page: ft.Page):
         txt_accion.update()
     
     def setTextAccionInput(e):
-        global clasificacion       
+        global clasificacion
+        # if(e==1):
+        #     # btn_a.bgcolor=ft.Colors.BLUE
+        #     btn_a.color=ft.Colors.AMBER
+        #     btn_a.update()
+        #     # btn_b.bgcolor=ft.Colors.SURFACE
+        #     btn_b.color=ft.Colors.SURFACE_TINT
+        #     btn_b.update()
+        #     # btn_c.bgcolor=ft.Colors.SURFACE
+        #     btn_c.color=ft.Colors.SURFACE_TINT
+        #     btn_c.update()
+        # elif(e==2):            
+        #     # btn_a.bgcolor=ft.Colors.SURFACE
+        #     btn_a.color=ft.Colors.SURFACE_TINT
+        #     btn_a.update()
+        #     # btn_b.bgcolor=ft.Colors.BLUE
+        #     btn_b.color=ft.Colors.AMBER
+        #     btn_b.update()
+        #     # btn_c.bgcolor=ft.Colors.SURFACE
+        #     btn_c.color=ft.Colors.SURFACE_TINT
+        #     btn_c.update()
+        # elif(e==3):            
+        #     # btn_a.bgcolor=ft.Colors.SURFACE
+        #     btn_a.color=ft.Colors.SURFACE_TINT
+        #     btn_a.update()
+        #     # btn_b.bgcolor=ft.Colors.SURFACE
+        #     btn_b.color=ft.Colors.SURFACE_TINT
+        #     btn_b.update()
+        #     # btn_c.bgcolor=ft.Colors.BLUE
+        #     btn_c.color=ft.Colors.AMBER
+        #     btn_c.update()
+
         clasificacion=e
         buscar()
     
@@ -140,11 +177,13 @@ def main(page: ft.Page):
 
         btnAbrirCamara.disabled=True
         btnCapturaFoto.disabled=True
-        btnSaveFoto=ft.disabled=True
+        btnSaveFoto.disabled=True
 
         btn_a.disabled=True
         btn_b.disabled=True
         btn_c.disabled=True
+
+        # btnSaveFoto.content=ft.Row([ft.Icon(ft.Icons.UPLOAD),ft.Text("Guardar foto")])       
 
         page.update()
         if cap is not None and cap.isOpened():
@@ -211,19 +250,23 @@ def main(page: ft.Page):
 
 
     def tomarRostro():
+        print("tomar rostro")
         global init_video,imagen_foto
         
         ret,frame=cap.read()
         frame=cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
         imagen_foto=frame
-        # playsound("sound/iphone-camera-capture-6448.mp3")
-        playsound(resourse_path("sound/iphone-camera-capture-6448.mp3"))
+        # playsound("./sound/iphone-camera-capture-6448.mp3", block=False)
+        playsound(resourse_path("./sound/iphone-camera-capture-6448.mp3"), block=False)
+        # print(imagen_foto)
 
 
         file_path = resourse_path("haarcascade_frontalface_default.xml")   
+        # file_path = "haarcascade_frontalface_default.xml"
         detector=cv2.CascadeClassifier(file_path)
 
-        faces=detector.detectMultiScale(frame,1.3,5)       
+        faces=detector.detectMultiScale(frame,1.3,5)  
+        print(faces)     
 
         for(x,y,w,h) in faces:
             init_video=False
@@ -294,12 +337,7 @@ def main(page: ft.Page):
         
 
 
-    def resourse_path(relative_path):
-        try:
-            base_path = sys._MEIPASS
-        except:
-            base_path = os.path.abspath(".")
-        return os.path.join(base_path, relative_path)
+    
 
 
     imagen_video=ft.Image(src="db/capture_rostro.png",width=360,height=640,border_radius=10)

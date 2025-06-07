@@ -1,0 +1,1 @@
+flet pack socio_capturar_foto.py --add-data 'db;db' --add-data 'sound;sound' --add-data 'haarcascade_frontalface_default.xml;.' --add-data 'wp.jpeg;.' --icon icono.png --product-name 'foto_socio' --name 'foto_socio'  --debug-console show
